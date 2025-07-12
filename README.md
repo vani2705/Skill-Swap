@@ -1,4 +1,4 @@
-# Skill Swap Recommendation Engine 
+# Skill Swap Recommendation Engine (Simplified)
 
 A simplified real-time skill recommendation engine for a "Skill Swap" web application. This system provides personalized skill recommendations based on user skills, ratings, and learning history.
 
@@ -259,6 +259,10 @@ python -m pytest test_*.py -v
 2. Add new endpoints to `main.py`
 3. Update data files as needed
 4. Add tests to `test_simple.py`
+
+## License
+
+This project is licensed under the MIT License.
 
 ## Contributing
 
