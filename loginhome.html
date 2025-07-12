@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap | Professional Skill Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .font-serif {
+                font-family: 'Playfair Display', serif;
+            }
+            .text-primary { color: #2c5282; }
+            .text-accent { color: #d69e2e; }
+            .bg-linkedin { background-color: #0A66C2; }
+            
+            /* Card animation */
+            .card-hover {
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            
+            /* Calendar styles */
+            .calendar-day {
+                @apply h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center rounded-full transition-colors;
+            }
+            .calendar-day:hover:not(.calendar-day-disabled) {
+                @apply bg-gray-100;
+            }
+            .calendar-day-active {
+                @apply bg-primary text-white;
+            }
+            .calendar-day-disabled {
+                @apply text-gray-300 cursor-not-allowed;
+            }
+            .calendar-day-event {
+                @apply relative after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-accent;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif']
+                },
+                extend: {
+                    colors: {
+                        linkedin: '#0A66C2',
+                        primary: '#2c5282',
+                        accent: '#d69e2e',
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'nav': '0 2px 30px rgba(0, 0, 0, 0.1)',
+                        'card-hover': '0 10px 25px rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-800">
+    <!-- Professional LinkedIn Blue Navigation -->
+    <header class="bg-linkedin text-white shadow-nav">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <h1 class="text-xl sm:text-2xl font-serif font-medium tracking-tight">SkillSwap</h1>
+                    <nav class="hidden sm:flex space-x-4 sm:space-x-6">
+                        <a href="#" class="text-white/90 hover:text-white transition-colors font-medium">Discover</a>
+                        <a href="#" class="text-white/90 hover:text-white transition-colors font-medium">Skill Swap</a>
+                        <a href="recommendation.html" class="text-white/90 hover:text-white transition-colors font-medium">Recommendations</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <!-- Profile picture instead of sign-in button -->
+                    <div class="relative group">
+                        <button class="flex items-center focus:outline-none">
+                            <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-sm sm:text-base font-bold text-primary">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User profile" class="h-full w-full object-cover">
+                            </div>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8 sm:mb-12">
+        <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8 max-w-full">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center">
+                <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 rounded-full overflow-hidden border-2 border-white shadow-lg bg-gray-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User profile" class="h-full w-full object-cover">
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-serif font-medium text-gray-900">Welcome back, Sarah!</h2>
+                    <p class="text-gray-600 mt-1 sm:mt-2">You have 3 pending skill swap requests and 2 upcoming exchanges.</p>
+                    <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">AWS Certified</span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Python Expert</span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">UI/UX Designer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Dashboard Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <!-- Pending Requests -->
+            <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden lg:col-span-2">
+                <div class="p-5 sm:p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-serif font-medium text-gray-900">Pending Swap Requests</h3>
+                </div>
+                <div class="divide-y divide-gray-200">
+                    <!-- Request 1 -->
+                    <div class="p-4 sm:p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 sm:space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-sm sm:text-base font-bold text-primary">
+                                        J
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm sm:text-base font-medium text-gray-900">John D.</h4>
+                                    <p class="text-xs sm:text-sm text-gray-500">Wants to learn: <span class="text-gray-700">AWS Architecture</span></p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Offers: <span class="text-gray-700">Graphic Design</span></p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-green-500 text-green-600 hover:bg-green-50 transition-colors">
+                                    Accept
+                                </button>
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition-colors">
+                                    Decline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Request 2 -->
+                    <div class="p-4 sm:p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 sm:space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-sm sm:text-base font-bold text-primary">
+                                        M
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm sm:text-base font-medium text-gray-900">Maria G.</h4>
+                                    <p class="text-xs sm:text-sm text-gray-500">Wants to learn: <span class="text-gray-700">Python Scripting</span></p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Offers: <span class="text-gray-700">Content Marketing</span></p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-green-500 text-green-600 hover:bg-green-50 transition-colors">
+                                    Accept
+                                </button>
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition-colors">
+                                    Decline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Request 3 -->
+                    <div class="p-4 sm:p-5 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 sm:space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-sm sm:text-base font-bold text-primary">
+                                        A
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm sm:text-base font-medium text-gray-900">Alex T.</h4>
+                                    <p class="text-xs sm:text-sm text-gray-500">Wants to learn: <span class="text-gray-700">UI/UX Design</span></p>
+                                    <p class="text-xs sm:text-sm text-gray-500">Offers: <span class="text-gray-700">Cloud Infrastructure</span></p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-green-500 text-green-600 hover:bg-green-50 transition-colors">
+                                    Accept
+                                </button>
+                                <button class="text-xs sm:text-sm font-medium px-2 sm:px-3 py-1 rounded-lg border border-red-500 text-red-600 hover:bg-red-50 transition-colors">
+                                    Decline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendar Section -->
+            <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden">
+                <div class="p-5 sm:p-6 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-serif font-medium text-gray-900" id="calendar-title"></h3>
+                        <div class="flex space-x-2">
+                            <button class="p-1 rounded-full hover:bg-gray-100 transition-colors" id="prev-month" aria-label="Previous month">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button class="p-1 rounded-full hover:bg-gray-100 transition-colors" id="next-month" aria-label="Next month">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 sm:p-5">
+                    <!-- Weekday headers -->
+                    <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="text-xs text-center text-gray-500 font-medium">Sun</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Mon</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Tue</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Wed</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Thu</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Fri</div>
+                        <div class="text-xs text-center text-gray-500 font-medium">Sat</div>
+                    </div>
+                    
+                    <!-- Calendar days grid -->
+                    <div class="grid grid-cols-7 gap-1" id="calendar-grid" role="grid" aria-labelledby="calendar-title">
+                        <!-- Days will be dynamically populated here -->
+                    </div>
+                </div>
+            </div>
+
+       
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Calendar navigation
+            const prevMonthBtn = document.querySelector('.bg-white.rounded-lg button:nth-of-type(1)');
+            const nextMonthBtn = document.querySelector('.bg-white.rounded-lg button:nth-of-type(2)');
+            
+            prevMonthBtn.addEventListener('click', function() {
+                console.log('Previous month clicked');
+                // Add actual month navigation logic here
+            });
+            
+            nextMonthBtn.addEventListener('click', function() {
+                console.log('Next month clicked');
+                // Add actual month navigation logic here
+            });
+            
+            // Calendar day selection
+            const calendarDays = document.querySelectorAll('.calendar-day:not(.calendar-day-disabled)');
+            calendarDays.forEach(day => {
+                day.addEventListener('click', function() {
+                    // Remove active class from all days
+                    calendarDays.forEach(d => d.classList.remove('calendar-day-active'));
+                    // Add active class to clicked day
+                    this.classList.add('calendar-day-active');
+                    console.log('Selected date:', this.textContent);
+                });
+            });
+            
+            // Request Swap buttons
+            const swapButtons = document.querySelectorAll('button:contains("Request Swap")');
+            swapButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const userName = this.closest('.bg-white').querySelector('h3').textContent;
+                    console.log(`Requesting swap with ${userName}`);
+                    // Add animation feedback
+                    this.classList.add('bg-primary', 'text-white');
+                    setTimeout(() => {
+                        this.classList.remove('bg-primary', 'text-white');
+                    }, 300);
+                });
+            });
+
+            // Accept/Decline buttons for pending requests
+            const actionButtons = document.querySelectorAll('button:contains("Accept"), button:contains("Decline")');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    const userName = this.closest('.flex.justify-between').querySelector('h4').textContent;
+                    console.log(`${action}ed swap request from ${userName}`);
+                    
+                    // Visual feedback
+                    const requestCard = this.closest('.hover\\:bg-gray-50');
+                    if (action === 'Accept') {
+                        requestCard.classList.add('bg-green-50');
+                        setTimeout(() => {
+                            requestCard.remove();
+                        }, 500);
+                    } else {
+                        requestCard.classList.add('bg-red-50');
+                        setTimeout(() => {
+                            requestCard.remove();
+                        }, 500);
+                    }
+                });
+            });
+
+            // Profile dropdown
+            const profileButton = document.querySelector('.relative.group button');
+            profileButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.parentNode.querySelector('.hidden');
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                const dropdowns = document.querySelectorAll('.group .hidden');
+                dropdowns.forEach(dropdown => {
+                    if (!dropdown.classList.contains('hidden')) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sample event data (replace with API in production)
+        const events = {
+            '2025-07-07': [{ title: 'AWS Skill Swap with John', time: '14:00', timeZone: 'IST' }],
+            '2025-07-12': [{ title: 'Python Session with Maria', time: '10:00', timeZone: 'IST' }],
+            '2025-07-18': [{ title: 'UI/UX Workshop', time: '15:00', timeZone: 'IST' }]
+        };
+
+        // Calendar state
+        const calendarGrid = document.getElementById('calendar-grid');
+        const calendarTitle = document.getElementById('calendar-title');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+
+        // Initialize with current date in IST (July 12, 2025, 3:24 PM IST)
+        const now = new Date();
+        // Adjust for IST (UTC+5:30)
+        const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
+        const istNow = new Date(now.getTime() + istOffset);
+        let currentDate = new Date(istNow.getFullYear(), istNow.getMonth(), 1);
+
+        // Function to generate calendar
+        function generateCalendar(date) {
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const today = new Date(now.getTime() + istOffset); // Real-time today in IST
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const prevMonthDays = new Date(year, month, 0).getDate();
+
+            // Update calendar title
+            calendarTitle.textContent = `${date.toLocaleString('default', { month: 'long', timeZone: 'Asia/Kolkata' })} ${year}`;
+
+            // Clear existing grid
+            calendarGrid.innerHTML = '';
+
+            // Add previous month's days (disabled)
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = prevMonthDays - i;
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day calendar-day-disabled';
+                dayElement.textContent = day;
+                dayElement.setAttribute('aria-disabled', 'true');
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                dayElement.setAttribute('role', 'gridcell');
+                dayElement.setAttribute('tabindex', '0');
+                dayElement.setAttribute('aria-label', `${date.toLocaleString('default', { month: 'long', timeZone: 'Asia/Kolkata' })} ${day}, ${year}`);
+
+                // Check if today
+                if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                    dayElement.classList.add('calendar-day-active');
+                    dayElement.setAttribute('aria-selected', 'true');
+                }
+
+                // Check for events
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                if (events[dateKey]) {
+                    dayElement.classList.add('calendar-day-event');
+                    dayElement.setAttribute('aria-describedby', `event-${dateKey}`);
+                    // Add tooltip for events
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'absolute z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 mt-12';
+                    tooltip.textContent = events[dateKey].map(event => `${event.title} at ${event.time} ${event.timeZone}`).join(', ');
+                    dayElement.classList.add('group');
+                    dayElement.appendChild(tooltip);
+                }
+
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add next month's days (disabled)
+            const totalCells = firstDay + daysInMonth;
+            const remainingCells = Math.ceil(totalCells / 7) * 7 - totalCells;
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day calendar-day-disabled';
+                dayElement.textContent = day;
+                dayElement.setAttribute('aria-disabled', 'true');
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add event listeners for day selection
+            const calendarDays = calendarGrid.querySelectorAll('.calendar-day:not(.calendar-day-disabled)');
+            calendarDays.forEach(day => {
+                day.addEventListener('click', function() {
+                    calendarDays.forEach(d => {
+                        d.classList.remove('calendar-day-active');
+                        d.removeAttribute('aria-selected');
+                    });
+                    this.classList.add('calendar-day-active');
+                    this.setAttribute('aria-selected', 'true');
+                    const selectedDate = new Date(year, month, parseInt(this.textContent));
+                    console.log('Selected date:', selectedDate.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }));
+                });
+
+                // Keyboard accessibility
+                day.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        }
+
+        // Initial calendar render
+        generateCalendar(currentDate);
+
+        // Navigation event listeners
+        prevMonthBtn.addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate);
+        });
+
+        nextMonthBtn.addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate);
+        });
+
+        // Periodic refresh to update "today" (every minute)
+        setInterval(() => {
+            const newNow = new Date();
+            const newIstNow = new Date(newNow.getTime() + istOffset);
+            if (newIstNow.getDate() !== istNow.getDate() || newIstNow.getMonth() !== istNow.getMonth()) {
+                istNow = newIstNow;
+                if (currentDate.getMonth() === istNow.getMonth() && currentDate.getFullYear() === istNow.getFullYear()) {
+                    generateCalendar(currentDate);
+                }
+            }
+        }, 60 * 1000);
+
+        // Profile dropdown
+        const profileButton = document.querySelector('.relative.group button');
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.parentNode.querySelector('.hidden');
+            dropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function() {
+            const dropdowns = document.querySelectorAll('.group .hidden');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        });
+
+        // Request Swap buttons (fixed selector)
+        const swapButtons = document.querySelectorAll('button:not(.calendar-day):not(#prev-month):not(#next-month)');
+        swapButtons.forEach(button => {
+            if (button.textContent.includes('Request Swap')) {
+                button.addEventListener('click', function() {
+                    const userName = this.closest('.bg-white').querySelector('h3').textContent;
+                    console.log(`Requesting swap with ${userName}`);
+                    this.classList.add('bg-primary', 'text-white');
+                    setTimeout(() => {
+                        this.classList.remove('bg-primary', 'text-white');
+                    }, 300);
+                });
+            }
+        });
+
+        // Accept/Decline buttons
+        const actionButtons = document.querySelectorAll('button:not(.calendar-day):not(#prev-month):not(#next-month)');
+        actionButtons.forEach(button => {
+            if (button.textContent.includes('Accept') || button.textContent.includes('Decline')) {
+                button.addEventListener('click', function() {
+                    const action = this.textContent.trim();
+                    const userName = this.closest('.flex.justify-between').querySelector('h4').textContent;
+                    console.log(`${action}ed swap request from ${userName}`);
+                    const requestCard = this.closest('.hover\\:bg-gray-50');
+                    if (action === 'Accept') {
+                        requestCard.classList.add('bg-green-50');
+                        setTimeout(() => {
+                            requestCard.remove();
+                        }, 500);
+                    } else {
+                        requestCard.classList.add('bg-red-50');
+                        setTimeout(() => {
+                            requestCard.remove();
+                        }, 500);
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap | Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .font-serif {
+                font-family: 'Playfair Display', serif;
+            }
+            .text-primary { color: #2c5282; }
+            .text-accent { color: #d69e2e; }
+            .bg-linkedin { background-color: #0A66C2; }
+            
+            /* Card animation */
+            .card-hover {
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif']
+                },
+                extend: {
+                    colors: {
+                        linkedin: '#0A66C2',
+                        primary: '#2c5282',
+                        accent: '#d69e2e',
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'nav': '0 2px 30px rgba(0, 0, 0, 0.1)',
+                        'card-hover': '0 10px 25px rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-800">
+    <!-- Professional LinkedIn Blue Navigation -->
+    <header class="bg-linkedin text-white shadow-nav">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <h1 class="text-xl sm:text-2xl font-serif font-medium tracking-tight">SkillSwap</h1>
+                    <nav class="hidden sm:flex space-x-4 sm:space-x-6">
+                        <a href="index.html" class="text-white/90 hover:text-white transition-colors font-medium">Discover</a>
+                        <a href="index.html" class="text-white/90 hover:text-white transition-colors font-medium">Skill Swap</a>
+                        <a href="recommendation.html" class="text-white/90 hover:text-white transition-colors font-medium">Recommendations</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <!-- Profile picture instead of sign-in button -->
+                    <div class="relative group">
+                        <button class="flex items-center focus:outline-none">
+                            <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-sm sm:text-base font-bold text-primary">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User profile" class="h-full w-full object-cover">
+                            </div>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <!-- Introduction Section -->
+        <div class="mb-8 sm:mb-12">
+            <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8 max-w-full">
+                <h2 class="text-xl sm:text-2xl font-serif font-medium text-gray-900">Recommended Profiles for You</h2>
+                <p class="text-gray-600 mt-2 sm:mt-3">Based on your skills (AWS Certified, Python Expert, UI/UX Designer) and interests (e.g., Graphic Design, Content Marketing, Cloud Infrastructure), here are the best matches to enhance your skill set. Explore and request a swap!</p>
+            </div>
+        </div>
+
+        <!-- Recommended Profiles -->
+        <div class="mb-8 sm:mb-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Profile 1: John D. (Graphic Design Expert) -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden border border-gray-100 card-hover">
+                    <div class="p-4 sm:p-5">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 relative">
+                                <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary">
+                                    J
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">John D.</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="ml-2 text-xs sm:text-sm text-gray-500">4.2/5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 space-y-2">
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Offers</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">Graphic Design, Adobe Suite</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Seeks</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">AWS Architecture, Python</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 sm:mt-5 flex justify-end">
+                            <button class="text-xs sm:text-sm font-medium px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors transform hover:scale-105">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile 2: Maria G. (Marketing Specialist) -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden border border-gray-100 card-hover">
+                    <div class="p-4 sm:p-5">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 relative">
+                                <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary">
+                                    M
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">Maria G.</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="ml-2 text-xs sm:text-sm text-gray-500">4.0/5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 space-y-2">
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Offers</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">Content Marketing, SEO</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Seeks</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">Python Scripting, UI/UX</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 sm:mt-5 flex justify-end">
+                            <button class="text-xs sm:text-sm font-medium px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors transform hover:scale-105">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile 3: Alex T. (Cloud Expert) -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden border border-gray-100 card-hover">
+                    <div class="p-4 sm:p-5">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 relative">
+                                <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary">
+                                    A
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">Alex T.</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="ml-2 text-xs sm:text-sm text-gray-500">4.3/5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 space-y-2">
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Offers</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">Cloud Infrastructure, Scaling</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Seeks</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">UI/UX Design, Data Analysis</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 sm:mt-5 flex justify-end">
+                            <button class="text-xs sm:text-sm font-medium px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors transform hover:scale-105">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile 4: Emily R. (Data Analyst) -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card overflow-hidden border border-gray-100 card-hover">
+                    <div class="p-4 sm:p-5">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 relative">
+                                <div class="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden border-2 border-white shadow bg-gray-200 flex items-center justify-center text-xl sm:text-2xl font-bold text-primary">
+                                    E
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">Emily R.</h3>
+                                <div class="flex items-center mt-1">
+                                    <span class="ml-2 text-xs sm:text-sm text-gray-500">4.1/5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 space-y-2">
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Offers</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">Data Analysis, Statistics</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Seeks</span>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-1">AWS, Content Strategy</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 sm:mt-5 flex justify-end">
+                            <button class="text-xs sm:text-sm font-medium px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors transform hover:scale-105">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profile dropdown
+            const profileButton = document.querySelector('.relative.group button');
+            profileButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.parentNode.querySelector('.hidden');
+                dropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', function() {
+                const dropdowns = document.querySelectorAll('.group .hidden');
+                dropdowns.forEach(dropdown => {
+                    if (!dropdown.classList.contains('hidden')) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Request Swap buttons
+            const swapButtons = document.querySelectorAll('button:not(#prev-month):not(#next-month)');
+            swapButtons.forEach(button => {
+                if (button.textContent.includes('Request Swap')) {
+                    button.addEventListener('click', function() {
+                        const userName = this.closest('.bg-white').querySelector('h3').textContent;
+                        console.log(`Requesting swap with ${userName}`);
+                        this.classList.add('bg-primary', 'text-white');
+                        setTimeout(() => {
+                            this.classList.remove('bg-primary', 'text-white');
+                        }, 300);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

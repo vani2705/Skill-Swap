@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap | Profile Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .font-serif {
+                font-family: 'Playfair Display', serif;
+            }
+            .text-primary { color: #2c5282; }
+            .text-accent { color: #d69e2e; }
+            .bg-linkedin { background-color: #0A66C2; }
+            
+            /* Card animation */
+            .card-hover {
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Skill tag styles */
+            .skill-tag {
+                @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary;
+            }
+            
+            /* Toggle switch */
+            .toggle-checkbox:checked {
+                @apply right-0 border-primary;
+                right: 0;
+                border-color: #2c5282;
+            }
+            .toggle-checkbox:checked + .toggle-label {
+                @apply bg-primary;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif']
+                },
+                extend: {
+                    colors: {
+                        linkedin: '#0A66C2',
+                        primary: '#2c5282',
+                        accent: '#d69e2e',
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        'nav': '0 2px 30px rgba(0, 0, 0, 0.1)',
+                        'card-hover': '0 10px 25px rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-800">
+    <!-- Professional LinkedIn Blue Navigation -->
+    <header class="bg-linkedin text-white shadow-nav">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <h1 class="text-xl sm:text-2xl font-serif font-medium tracking-tight">SkillSwap</h1>
+                    <nav class="hidden sm:flex space-x-4 sm:space-x-6">
+                        <a href="#" class="text-white/90 hover:text-white transition-colors font-medium">Discover</a>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Setup Content -->
+    <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div class="flex justify-between items-center mb-6 sm:mb-8">
+            <h2 class="text-2xl sm:text-3xl font-serif font-medium text-gray-900">Profile Setup</h2>
+            <div class="flex space-x-3">
+                <button class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors">
+                    Save
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Left Column - Form -->
+            <div class="lg:col-span-2 space-y-6 sm:space-y-8">
+                <!-- Basic Info -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8">
+                    <h3 class="text-lg font-serif font-medium text-gray-900 mb-4 sm:mb-6">Basic Information</h3>
+                    
+                    <div class="space-y-4 sm:space-y-6">
+                        <div>
+                            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required
+                                   class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skills Offered -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8">
+                    <h3 class="text-lg font-serif font-medium text-gray-900 mb-4 sm:mb-6">Skills Offered</h3>
+                    
+                    <div class="space-y-4 sm:space-y-6">
+                        <div id="skillsOfferedContainer" class="flex flex-wrap gap-2 mb-4">
+                            <!-- Skills will be added here dynamically -->
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                            <div>
+                                <label for="skillOffered" class="block text-sm font-medium text-gray-700 mb-1">Add Skill</label>
+                                <select id="skillOffered" name="skillOffered"
+                                        class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                                    <option value="">Select a skill</option>
+                                    <option value="Photoshop">Photoshop</option>
+                                    <option value="JavaScript">JavaScript</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Graphic Design">Graphic Design</option>
+                                    <option value="AWS">AWS</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="skillLevel" class="block text-sm font-medium text-gray-700 mb-1">Skill Level</label>
+                                <select id="skillLevel" name="skillLevel"
+                                        class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Expert">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="skillDescription" class="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
+                            <textarea id="skillDescription" name="skillDescription" rows="2"
+                                      class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <button id="addSkillBtn" type="button"
+                                class="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors">
+                            Add Skill
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Skills Wanted -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8">
+                    <h3 class="text-lg font-serif font-medium text-gray-900 mb-4 sm:mb-6">Skills Wanted</h3>
+                    
+                    <div class="space-y-4 sm:space-y-6">
+                        <div id="skillsWantedContainer" class="flex flex-wrap gap-2 mb-4">
+                            <!-- Skills will be added here dynamically -->
+                        </div>
+                        
+                        <div>
+                            <label for="skillWanted" class="block text-sm font-medium text-gray-700 mb-1">Add Skill</label>
+                            <select id="skillWanted" name="skillWanted"
+                                    class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                                <option value="">Select a skill</option>
+                                <option value="Python">Python</option>
+                                <option value="Show Script">Show Script</option>
+                                <option value="Management">Management</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="Cloud Computing">Cloud Computing</option>
+                            </select>
+                        </div>
+                        
+                        <button id="addWantedSkillBtn" type="button"
+                                class="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors">
+                            Add Skill
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Availability -->
+                <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8">
+                    <h3 class="text-lg font-serif font-medium text-gray-900 mb-4 sm:mb-6">Availability</h3>
+                    
+                    <div class="space-y-4 sm:space-y-6">
+                        <div id="availabilityContainer" class="flex flex-wrap gap-2 mb-4">
+                            <!-- Availability options will be added here dynamically -->
+                        </div>
+                        
+                        <div>
+                            <label for="availability" class="block text-sm font-medium text-gray-700 mb-1">Add Availability</label>
+                            <select id="availability" name="availability"
+                                    class="w-full px-4 py-2 sm:py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                                <option value="">Select availability</option>
+                                <option value="Weekdays">Weekdays</option>
+                                <option value="Weekends">Weekends</option>
+                                <option value="Evenings">Evenings</option>
+                                <option value="Flexible">Flexible</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Profile Visibility</label>
+                                <p class="text-sm text-gray-500">Control who can see your profile</p>
+                            </div>
+                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                <input type="checkbox" id="profileVisibility" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                <label for="profileVisibility" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                            </div>
+                            <span id="visibilityLabel" class="text-sm font-medium">Public</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column - Profile Photo -->
+            <div class="bg-white rounded-lg sm:rounded-xl shadow-card p-6 sm:p-8 h-fit">
+                <h3 class="text-lg font-serif font-medium text-gray-900 mb-4 sm:mb-6">Profile Photo</h3>
+                
+                <div class="flex flex-col items-center">
+                    <div class="relative mb-4">
+                        <div id="profilePhotoPreview" class="h-32 w-32 sm:h-40 sm:w-40 rounded-full overflow-hidden border-2 border-white shadow-lg bg-gray-200 flex items-center justify-center text-4xl sm:text-5xl font-bold text-primary">
+                            <span id="initials">JD</span>
+                        </div>
+                        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" class="hidden">
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button id="uploadPhotoBtn" class="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors">
+                            Add/Edit
+                        </button>
+                        <button id="removePhotoBtn" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Store skill data including descriptions
+            const skillsData = {
+                offered: [],
+                wanted: []
+            };
+
+            // Add Skill Offered
+            document.getElementById('addSkillBtn').addEventListener('click', function() {
+                const skillSelect = document.getElementById('skillOffered');
+                const levelSelect = document.getElementById('skillLevel');
+                const description = document.getElementById('skillDescription');
+                
+                if (skillSelect.value) {
+                    // Store the skill data
+                    const skillData = {
+                        name: skillSelect.value,
+                        level: levelSelect.value,
+                        description: description.value
+                    };
+                    skillsData.offered.push(skillData);
+                    
+                    // Add the tag (without showing description)
+                    addSkillTag(
+                        'skillsOfferedContainer',
+                        skillSelect.value,
+                        levelSelect.value
+                    );
+                    
+                    // Reset form
+                    skillSelect.value = '';
+                    levelSelect.value = 'Beginner';
+                    description.value = '';
+                }
+            });
+            
+            // Add Skill Wanted
+            document.getElementById('addWantedSkillBtn').addEventListener('click', function() {
+                const skillSelect = document.getElementById('skillWanted');
+                
+                if (skillSelect.value) {
+                    // Store the skill data
+                    const skillData = {
+                        name: skillSelect.value
+                    };
+                    skillsData.wanted.push(skillData);
+                    
+                    // Add the tag
+                    addSkillTag('skillsWantedContainer', skillSelect.value);
+                    skillSelect.value = '';
+                }
+            });
+            
+            // Add Availability
+            document.getElementById('availability').addEventListener('change', function() {
+                if (this.value) {
+                    addAvailabilityTag(this.value);
+                    this.value = '';
+                }
+            });
+            
+            // Profile Visibility Toggle
+            document.getElementById('profileVisibility').addEventListener('change', function() {
+                const label = document.getElementById('visibilityLabel');
+                label.textContent = this.checked ? 'Private' : 'Public';
+            });
+            
+            // Profile Photo Upload
+            document.getElementById('uploadPhotoBtn').addEventListener('click', function() {
+                document.getElementById('profilePhoto').click();
+            });
+            
+            document.getElementById('profilePhoto').addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const preview = document.getElementById('profilePhotoPreview');
+                        preview.innerHTML = `<img src="${event.target.result}" alt="Profile photo" class="h-full w-full object-cover">`;
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            // Remove Photo
+            document.getElementById('removePhotoBtn').addEventListener('click', function() {
+                const preview = document.getElementById('profilePhotoPreview');
+                preview.innerHTML = '<span id="initials">JD</span>';
+                document.getElementById('profilePhoto').value = '';
+            });
+            
+            // Helper function to add skill tags (without showing description)
+            function addSkillTag(containerId, skill, level = '') {
+                const container = document.getElementById(containerId);
+                const tagId = 'skill-' + Date.now();
+                
+                const tag = document.createElement('div');
+                tag.className = 'skill-tag relative pr-6';
+                tag.id = tagId;
+                
+                let tagContent = skill;
+                if (level) tagContent += ` (${level})`;
+                
+                tag.innerHTML = `
+                    ${tagContent}
+                    <button onclick="removeTag('${tagId}')" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                `;
+                
+                container.appendChild(tag);
+            }
+            
+            // Helper function to add availability tags
+            function addAvailabilityTag(availability) {
+                const container = document.getElementById('availabilityContainer');
+                const tagId = 'avail-' + Date.now();
+                
+                const tag = document.createElement('div');
+                tag.className = 'skill-tag relative pr-6';
+                tag.id = tagId;
+                tag.innerHTML = `
+                    ${availability}
+                    <button onclick="removeTag('${tagId}')" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                `;
+                
+                container.appendChild(tag);
+            }
+            
+            // Make removeTag function available globally
+            window.removeTag = function(tagId) {
+                document.getElementById(tagId).remove();
+            };
+        });
+    </script>
+</body>
+</html>
