@@ -260,10 +260,6 @@ python -m pytest test_*.py -v
 3. Update data files as needed
 4. Add tests to `test_simple.py`
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Contributing
 
 1. Fork the repository
