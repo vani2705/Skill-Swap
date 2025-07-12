@@ -1,4 +1,4 @@
-# Skill Swap Recommendation Engine (Simplified)
+# Skill Swap Recommendation Engine 
 
 A simplified real-time skill recommendation engine for a "Skill Swap" web application. This system provides personalized skill recommendations based on user skills, ratings, and learning history.
 
